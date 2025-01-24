@@ -26,13 +26,23 @@ def main():
             except ValueError:
                 print("Your input must be an integer.")
 
+        # If the amount of wanted tickets is in stock, is less than 4, and is more than 0, continue
         if (wanted <= tickets) & (4 >= wanted) & (wanted > 0):
+
+            # increment here
             tickets -= wanted
+
+            # update file with new data
             update_file(tickets, f)
+
+            # close file
             f.close()
+
+            # Restart in case the customer would like to buy again.
             print(f"You have successfully purchased {wanted} tickets!")
             main()
 
+        # If the customer decides they don't want to buy any tickets, close the program.
         elif wanted == 0:
             f.close()
             return
@@ -72,6 +82,7 @@ def update_file(tickets, f):
     fwrite.write(f"{tickets}\n{buyers}")
     fwrite.close()
 
+# If there are no tickets left to buy, return the data, and allow for a devreset.
 def out_of_stock():
     checkforreset = input("We are currently out of stock. Press ENTER to return.")
     f = open("data.txt", "r")
